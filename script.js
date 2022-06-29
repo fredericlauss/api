@@ -1,5 +1,11 @@
 console.log("loaded");
 
+ function toBase64(r) {
+           
+            document.getElementById("img").src = r;
+            console.log(r);
+         }
+
 function gen()
 {
     console.log("click");
@@ -17,14 +23,15 @@ function gen()
         })
     });
 
-    truc.then(r => {
-        console.log(r);
-        let imageResult = r
-
+    truc.then(r => r.blob())
+    .then(r => {
+        let reader=new FileReader()
+        reader.addEventListener('loadend',()=>{
+        let contents=reader.result
+        toBase64(contents)
+        })
+        reader.readAsDataURL(r)
     });
+
 }
 
-function genplus() {
-    let b = document.getElementById(truc);
-    b.textContent = r.;
-}
